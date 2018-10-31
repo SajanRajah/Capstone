@@ -1,0 +1,4 @@
+.project
+vendor/
+CommunityPortal\public\bootstrap/*
+CommunityPortal\public\css/*

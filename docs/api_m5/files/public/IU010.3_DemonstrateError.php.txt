@@ -1,0 +1,31 @@
+<?php
+error_reporting(E_ALL);
+
+function demoError(){
+	$servername="localhost";
+	$username="root";
+	$password="phpmyadmin575";
+	$dbname="communityportal";
+	
+	//Creating connection
+	$conn=new mysqli($servername,$username,$password,$dbname);
+	
+	//Checking connection
+	if ($conn->connect_error){
+		die("Connection failed: " .$conn->connect_error);
+	}
+	$sql="SELECT id, firstname, lastname FROM TB_FEEDBACK where firstname='Sajan'";
+	$result=$conn->query($sql);
+	if($result->num_rows>0){
+		//getting output data for each row
+		while($row=$result->fetch_assoc()){
+			echo "Id: " .$row['id']. "- Name: " .$row['firstname']. " " .$row['lastname']. "<br/>";
+		}
+	}	else{
+		trigger_error("Required User Not Found", E_USER_ERROR);
+	}
+	$result->free();
+	$conn->close();
+}
+demoError();
+?>

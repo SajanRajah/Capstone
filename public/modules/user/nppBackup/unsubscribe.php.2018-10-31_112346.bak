@@ -1,0 +1,30 @@
+<?php
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>Unsubscribe</title>
+<meta http-equiv="content-type" content="text/html;charset=utf-8">
+<link rel="stylesheet" href="unsubscribestyle.css" type="text/css">
+</head>
+
+<body>
+<form autocomplete="off" action="unsubscribescript.php" method="post" id="formoid" class="formun">
+<div><h2 class="title">Do you want to unsubscribe?</h2></div>
+<div><label class="title">Email to unsubscribe:</label><input autocomplete="on" type="text" name="email" value="<?php echo $email; ?>"></div>
+<div><label class="title">Please let us know why you are unsubscribing:</label>
+<div> <input type="radio" name="answer" value="Inappropriate emails"><span>Inappropriate emails</span><br>
+<input type="radio" name="answer" value="Not interested anymore"><span>Not interested anymore</span><br>
+<input type="radio" name="answer" value="Too often"><span>Too often</span><br>
+<input type="radio" name="answer" value="Bad products"><span>Bad products</span><br>
+<input type="radio" name="answer" value="Awful support"><span>Awful support</span><br>
+
+</div>
+</div>
+<div><input type="submit" name="unsubscribe" value="Unsubscribe"></div>
+<p class="link"><a href="https://www.formget.com/" target="_blank">For best themes :- Formget.com</a>
+</p>
+</form>
+</body>
+</html>
+?>

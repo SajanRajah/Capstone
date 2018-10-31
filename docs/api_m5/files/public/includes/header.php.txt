@@ -1,0 +1,119 @@
+<!-- Navigation Bar -->
+<?php 
+   if(isset($_SESSION["email"]))
+   {
+?>
+
+<link rel="stylesheet" href="bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<style>
+
+/* Remove the navbar's default margin-bottom and rounded borders */ 
+			.navbar {
+			  margin-bottom: 30;
+			  border-radius: 0;
+			}
+			
+					
+			/* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+			.row.content {height: 450px}
+			
+			/* Set gray background color and % height */
+			.sidenav {
+			  padding-top: 20px;
+			  background-color: #f1f1f1;
+			  height: 125%;
+			}
+			
+			/* Set background color,  text and some padding */
+			.navbar {
+			  background-color: #000066;
+			  color: yellow;
+			  padding: 15px;
+			}
+			
+			
+			
+			
+</style>
+
+
+		<nav class="navbar navbar-inverse">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>                        
+					</button>
+				</div>
+				
+				<div class="collapse navbar-collapse" id="myNavbar">
+					<ul class="nav navbar-nav">
+						<li><img src="/students/SG0318A17/m5project/CommunityPortal/public/images/logo.png" align="left" style="width:55px; height:55px"></li>
+						<li><a href="/students/SG0318A17/m5project/CommunityPortal/public/home.php"><font color="white">Home</font></a></li>
+						<li><a href="/students/SG0318A17/m5project/CommunityPortal/public/aboutus.php">About Us</a></li>
+						<li><a href="/students/SG0318A17/m5project/CommunityPortal/public/contactus.php">Contact Us</a></li>
+						<li><a href="/students/SG0318A17/m5project/CommunityPortal/public/modules/user/updateprofile.php">Update Profile</a></li>
+				<?php
+						if($_SESSION["role"]=="admin") //added for admin role - 20180905
+						{
+				?>
+							<li><a href="/students/SG0318A17/m5project/CommunityPortal/public/modules/user/userlist.php"><font color="orange">ADMIN: View Users</font></a></li>
+							<li><a href="/students/SG0318A17/m5project/CommunityPortal/public/modules/user/feedbacklist.php"><font color="orange">ADMIN: View Feedback</font></a></li>
+				<?php		
+						}	
+				?>
+						
+					</ul>
+      
+					<ul class="nav navbar-nav navbar-right">
+						<li><a href="/students/SG0318A17/m5project/CommunityPortal/public/logout.php">Logout</a></li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+
+
+<?php 
+   } 
+        else
+   {
+?>
+
+<link rel="stylesheet" href="bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<nav class="navbar navbar-inverse">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>                        
+					</button>
+				</div>
+				
+				<div class="collapse navbar-collapse" id="myNavbar">
+					<ul class="nav navbar-nav">
+						<li><img src="/students/SG0318A17/m5project/CommunityPortal/public/images/logo.png" align="left" style="width:55px; height:55px"></li>
+						<li><a href="/students/SG0318A17/m5project/CommunityPortal/public/home.php"><font color="white">Home</font></a></li>
+						<li><a href="/students/SG0318A17/m5project/CommunityPortal/public/aboutus.php">About Us</a></li>
+						<li><a href="/students/SG0318A17/m5project/CommunityPortal/public/contactus.php">Contact Us</a></li>
+											
+						
+					</ul>
+      
+					<ul class="nav navbar-nav navbar-right">
+						<li><a href="/students/SG0318A17/m5project/CommunityPortal/public/login.php">Login</a></li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+
+
+<?php 
+   } 
+?>

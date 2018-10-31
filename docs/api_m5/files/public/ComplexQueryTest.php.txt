@@ -1,0 +1,34 @@
+<?php
+class ComplexQueryTest extends PHPUNit_Extensions_Database_TestCase{
+	static private $pdo = null;
+	private $conn = null;
+	protected function getConnection()
+	{
+		if($this->conn === null){
+			if(self::$pdo == null){
+				self::$pdo = new PDO('mysql:dbname=test;host=localhost','root','phpmyadmin575');
+			}
+			$this->conn = $this->createDefaultDBConnection(self::$pdo, 'lithan_testing');
+		}
+		return $this->conn;
+	}
+	protected function getDataSet(){
+		return $this->createFlatXMLDataSet(__DIR__.'/complexQueryAssertion.xml');
+	}
+	
+	public function testInsert(){
+		$queryTable = new PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
+		$queryTable->addTable('TB_FEEDBACK',"Select firstname, lastname, email, comments FROM TB_FEEDBACK");
+		
+		$expectedTable = $this->createFlatXMLDataSet("complexQueryAssertion.xml");
+		$this->assertDataSetsEqual($expectedTable, $queryTable);
+	}
+	
+	public function testCount(){
+		$this->assertEquals(1,$this->getConnection()->getRowCount('TB_FEEDBACK'));
+	}
+}
+
+
+
+?>

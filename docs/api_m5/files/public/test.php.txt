@@ -1,0 +1,54 @@
+<?php
+use classes\data\UserManagerDB;
+require_once 'includes/autoload.php';
+
+	$UM=new UserManagerDB();
+	$sql = $UM->searchSQL("Robin", "Ng", "rng@gmail.com");
+	echo $sql . "<br>";
+	
+	$sql = $UM->searchSQL("Robin", "", "rng@gmail.com");
+	echo $sql . "<br>";
+	
+	$sql = $UM->searchSQL("Robin", "", "");
+	echo $sql . "<br>";
+	/*
+	$condn = "";
+	$condn = $UM->searchSQL($condn, "first_name", "", "OR");
+	$condn = $UM->searchSQL($condn, "last_name", "Ng", "OR");
+	$condn = $UM->searchSQL($condn, "email", "", "OR");
+	print $condn . "<br>";
+	
+	$condn = "";
+	$condn = $UM->searchSQL($condn, "first_name", "Robin", "OR");
+	$condn = $UM->searchSQL($condn, "last_name", "", "OR");
+	$condn = $UM->searchSQL($condn, "email", "", "OR");
+	print $condn . "<br>";
+	
+	$condn = "";
+	$condn = $UM->searchSQL($condn, "first_name", "", "OR");
+	$condn = $UM->searchSQL($condn, "last_name", "", "OR");
+	$condn = $UM->searchSQL($condn, "email", "jey@email.com", "OR");
+	print $condn . "<br>";
+	
+	
+	
+	$condn = "";
+	$condn = $UM->searchSQL($condn, "first_name", "Robin", "OR");
+	$condn = $UM->searchSQL($condn, "last_name", "", "OR");
+	$condn = $UM->searchSQL($condn, "email", "rb@gmail.com", "OR");
+	print $condn . "<br>";
+	
+	
+	$condn = "";
+	$condn = $UM->searchSQL($condn, "first_name", "", "OR");
+	$condn = $UM->searchSQL($condn, "last_name", "rajah", "OR");
+	$condn = $UM->searchSQL($condn, "email", "rh@gmail.com", "OR");
+	print $condn . "<br>";
+	
+	$condn = "";
+	$condn = $UM->searchSQL($condn, "first_name", "Swee", "OR");
+	$condn = $UM->searchSQL($condn, "last_name", "Lee", "OR");
+	$condn = $UM->searchSQL($condn, "email", "", "OR");
+	print $condn . "<br>";*/
+	
+?>

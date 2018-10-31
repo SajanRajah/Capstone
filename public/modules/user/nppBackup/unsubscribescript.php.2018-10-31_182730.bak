@@ -1,0 +1,13 @@
+<?php
+//fetch the email id of the user
+$emailid=$_POST['email'];
+$pollids="data.txt";
+$contents = file_get_contents($pollids);
+// this will delets the email id of the user from txt file
+$n= str_replace($emailid.",","","$contents");
+//this rewrite the fresh emailid in the file
+$file = fopen("data.txt",'w');
+fwrite($file, $n);
+fclose($file);
+header('Location: https://www.inkthemes.com/');
+?>

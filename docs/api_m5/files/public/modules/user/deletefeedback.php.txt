@@ -1,0 +1,76 @@
+<?php
+session_start();
+require_once '../../includes/autoload.php';
+
+use classes\business\FeedbackManager;
+use classes\entity\Feedback;
+
+ob_start();
+include '../../includes/security.php';
+include '../../includes/header.php';
+?>
+
+<?php
+
+$formerror="";
+$firstname="";
+$lastname="";
+$email="";
+$comments='';
+//$password="";
+$deleteflag=false;
+
+if(isset($_POST["submitted"])){
+  if(isset($_GET["email"])){
+       $FM=new FeedbackManager();
+       $existuser=$FM->deleteAccount($_GET["email"]);
+        $formerror="Feedback deleted successfully.";
+		$deleteflag=true;
+	}
+}else if(isset($_POST["cancelled"])){
+	header("Location:../../home.php");
+}else{
+	if(isset($_GET["id"]))
+	{
+	  $FM=new FeedbackManager();
+	  $existuser=$FM->getFeedbackByEmail($_GET["$email"]);
+	  $firstname=$existuser->firstname;
+	  $lastname=$existuser->lastname;
+	  $email=$existuser->email;
+	  //$password=$existuser->password;
+	}
+}
+?>
+<link rel="stylesheet" href="..\..\bootstrap/3.3.7/css/bootstrap.min.css">
+		<script src="..\..\ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<script src="..\..\bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<form name="deleteUser" method="post" class="pure-form pure-form-stacked">
+<h1>Delete User</h1>
+<div><?=$formerror?></div>
+<?php
+if (!$deleteflag)
+{
+?>
+<table width="800">
+  <tr>
+    <td>Please confirm that you want to <b>DELETE</b> the following record?</td>
+  </tr>
+   <tr>
+    <td><?=$email?></td>
+  </tr>
+  <tr>
+	<td></td>
+    <td><input type="submit" name="submitted" value="Delete" class="pure-button pure-button-primary">
+    <input type="submit" name="cancelled" value="Cancel" class="pure-button pure-button-primary"></td>
+    </td>
+  </tr>
+</table>
+<?php
+}
+?>
+</form>
+
+
+<?php
+include '../../includes/footer.php';
+?>

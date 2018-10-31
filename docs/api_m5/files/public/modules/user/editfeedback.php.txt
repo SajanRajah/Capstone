@@ -1,0 +1,89 @@
+<?php
+session_start();
+require_once '../../includes/autoload.php';
+
+use classes\business\FeedbackManager;
+use classes\entity\Feedback;
+
+ob_start();
+include '../../includes/security.php';
+include '../../includes/header.php';
+?>
+
+<?php
+$formerror="";
+$firstName="";
+$lastName="";
+$email="";
+$password="";
+$existuser="";
+$comments='';
+
+if(isset($_POST["submitted"])){
+  if(isset($_GET["email"])){
+	  $FM=new FeedbackManager();
+	  $formerror="Feedback edited successfully.";
+	  $existuser=$UM->getFeedbackByEmail($_GET["email"]);
+	  $existuser->firstName=$_POST["firstname"];
+	  $FM->saveFeedback($existuser);
+	  }
+}else if(isset($_POST["cancelled"])){
+  header("Location:../../home.php");
+}else{
+	if(isset($_GET_ID["id"])){
+		$FM=new FeedbackManager();
+		$existuser=$FM->getFeedbackByEmail($_GET["email"]);
+		$firstName=$existuser->firstName;
+		$lastName=$existuser->lastName;
+		$email=$existuser->email;
+		$password=$existuser->password;
+		}
+	}
+  
+  
+ 
+?>
+<link rel="stylesheet" href="..\..\bootstrap/3.3.7/css/bootstrap.min.css">
+		<script src="..\..\ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<script src="..\..\bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<form name="myForm" method="post" class="pure-form pure-form-stacked">
+<h1>ADMIN: Edit Feedback for <?$email?></h1>
+<div><?=$formerror?></div>
+<table width="800">
+  <tr>
+    <td>First Name</td>
+    <td><input type="text" name="firstName" value="<?=$firstName?>" size="50"></td>
+  </tr>
+  <tr>
+    <td>Last Name</td>
+    <td><input type="text" name="lastName" value="<?=$lastName?>" size="50"></td>
+  </tr>
+  <tr>
+    <td>Email</td>
+    <td><input type="text" name="email" value="<?=$email?>" size="50"></td>
+  </tr>
+  <tr>
+    <td>Comments</td>
+    <td><input type="text" name="comments" value="<?=$comments?>" size="300"></td>
+  </tr>
+  <!--<tr>
+    <td>Password</td>
+    <td><input type="password" name="password" value="<?=$password?>" size="20"></td>
+  </tr>
+  <tr>
+    <td>Confirm Password</td>
+    <td><input type="password" name="cpassword" value="<?=$password?>" size="20"></td>
+  </tr>
+  <tr>-->
+	<td></td>
+    <td><input type="submit" name="submitted" value="Submit" class="pure-button pure-button-primary">
+    <input type="reset" name="reset" value="Reset" class="pure-button pure-button-primary"></td>
+    </td>
+  </tr>
+</table>
+</form>
+
+
+<?php
+include '../../includes/footer.php';
+?>

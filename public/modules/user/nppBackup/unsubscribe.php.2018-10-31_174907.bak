@@ -1,0 +1,65 @@
+<?php
+session_start();
+use classes\business\UserManager;
+use classes\business\Validation;
+
+require 'vendor/autoload.php';						//Load Composer's autoloader
+//include 'includes/header.php';
+$formerror="";
+
+$email="";
+$password="";
+$error_auth="";
+$error_name="";
+$error_passwd="";
+$error_email="";
+$validate=new Validation();
+
+if(isset($_POST["submitted"])){
+    $email=$_POST["email"];
+    $password=$_POST["password"];
+	if($validate->check_password($password, $error_passwd))
+	{
+		$UM=new UserManager();
+
+		$existuser=$UM->getUserByEmailPassword($email,$password);
+		if(isset($existuser)){
+			
+			$_SESSION['email']=$email;
+			$_SESSION['id']=$existuser->id;
+			echo '<meta http-equiv="Refresh" content="1; url=home.php">';
+		}else{
+			$formerror="Invalid User Name or Password";
+		}
+	}
+}
+
+
+ //20181031 for subscribe status
+  //update table_column to 0 if unsubscribe
+  if (isset($_POST["unsubscribe"])){
+	$unsubscribe=0;
+   }
+
+
+
+?>
+
+
+
+<link rel="stylesheet" href="..\..\bootstrap/3.3.7/css/bootstrap.min.css">
+		<script src="..\..\ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<script src="..\..\bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<form name="myForm" action="unsubscribescript.php" method="post" class="pure-form pure-form-stacked">
+<div><h2 class="title">Confirm you want to unsubscribe?</h2></div>
+<div><label class="title">Email to unsubscribe:</label><input autocomplete="on" type="text" name="email" ></div>
+<div><label class="title">Password:</label><input type="text" name="email" ></div>
+</div>
+</div>
+<div><input type="submit" name="unsubscribe" value="Unsubscribe"></div>
+
+
+</p>
+</form>
+</body>
+</html>

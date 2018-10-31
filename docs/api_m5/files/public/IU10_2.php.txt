@@ -1,0 +1,45 @@
+<?php
+class TableDB{
+	function getRecordCount(){
+			$servername = "localhost";
+			$username = "root";
+			$password = "phpmyadmin575";
+			$dbname = "communityportal";
+			//Create Connection
+			$conn = new mysqli($servername, $username, $password, $dbname);
+			
+	$sql = "SELECT COUNT(*) as Cnt FROM TB_FEEDBACK";
+			$result = $conn->query($sql);
+			$row = $result->fetch_assoc();
+			
+			$count = $row["Cnt"];
+			$result->free();
+			$conn->close();
+			return $count;
+	}
+
+	function createFeedback($firstname, $lastname, $email, $comments){
+			$servername = "localhost";
+			$username = "root";
+			$password = "phpmyadmin575";
+			$dbname = "communityportal";
+			
+			//Create Connection
+			$conn = new mysqli($servername, $username, $password, $dbname);
+			
+			//Check connection
+			if ($conn->connect_error){
+				die("Connection failed:".$conn->connect_error);
+			}
+			$sqlcomments=$conn->real_escape_string($comments);
+			$sql = "INSERT INTO tb_feedback(firstname, lastname, email, comments)VALUES('$firstname','$lastname','$email','$comments')";
+			$conn->query($sql);
+			$conn->close();
+	}
+}
+
+$t=new TableDB();
+print $t->getRecordCount();
+$t->createFeedback('S','R','sajanrajah@gmail.com','test 10.2');
+
+?>	
