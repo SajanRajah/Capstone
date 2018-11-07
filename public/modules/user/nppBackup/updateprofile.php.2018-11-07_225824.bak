@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 require_once '../../includes/autoload.php';
 
 use classes\business\UserManager;
